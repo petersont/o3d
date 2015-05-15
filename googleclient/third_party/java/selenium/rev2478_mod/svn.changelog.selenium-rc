@@ -1,0 +1,778 @@
+------------------------------------------------------------------------
+r2308 | jrhuggins | 2008-06-12 06:46:06 -0700 (Thu, 12 Jun 2008) | 2 lines
+
+Fix for SRC-487 ("Running tests with Firefox 3 requires reacceptance of end-user license agreement.")
+
+------------------------------------------------------------------------
+r2309 | paul | 2008-06-16 12:23:56 -0700 (Mon, 16 Jun 2008) | 1 line
+
+WaitFor/Conditions - controbuted from Google
+------------------------------------------------------------------------
+r2310 | paul | 2008-06-16 14:13:14 -0700 (Mon, 16 Jun 2008) | 1 line
+
+selenium jar patcher from Jennifer at Google
+------------------------------------------------------------------------
+r2311 | paul | 2008-06-16 14:26:45 -0700 (Mon, 16 Jun 2008) | 1 line
+
+make mac compatible
+------------------------------------------------------------------------
+r2312 | paul | 2008-06-16 14:53:56 -0700 (Mon, 16 Jun 2008) | 1 line
+
+working for mac and linux, takes path/to/jar as first arg
+------------------------------------------------------------------------
+r2313 | ph7 | 2008-06-20 01:54:25 -0700 (Fri, 20 Jun 2008) | 1 line
+
+RC: Adding support for Firefox 3
+------------------------------------------------------------------------
+r2314 | gyrm | 2008-06-20 19:12:38 -0700 (Fri, 20 Jun 2008) | 1 line
+
+Fix SRC-318 - Post requests by .NET client, and support per-session Javascript.
+------------------------------------------------------------------------
+r2315 | ph7 | 2008-06-20 22:25:29 -0700 (Fri, 20 Jun 2008) | 1 line
+
+Fixing BrowserLauncherFactoryUnitTest for machines where Firefox 3 is not installed
+------------------------------------------------------------------------
+r2316 | ph7 | 2008-06-24 12:51:19 -0700 (Tue, 24 Jun 2008) | 1 line
+
+Launchers: Removed some duplicated code and introduced a honorSystemProxy mode for Safari
+------------------------------------------------------------------------
+r2317 | ph7 | 2008-06-24 16:03:26 -0700 (Tue, 24 Jun 2008) | 1 line
+
+Launchers: Removing duplicated code and consolidating the browser installation discovery logic.
+------------------------------------------------------------------------
+r2318 | ph7 | 2008-06-24 18:11:56 -0700 (Tue, 24 Jun 2008) | 1 line
+
+Launchers: Removed even more duplicated logic. Improved Firefox 2 discovering logic to work cross-platform
+------------------------------------------------------------------------
+r2319 | ph7 | 2008-06-24 18:56:29 -0700 (Tue, 24 Jun 2008) | 1 line
+
+Fixing Launcher for IE and Firefox 3 on Windows
+------------------------------------------------------------------------
+r2320 | ph7 | 2008-06-24 21:30:47 -0700 (Tue, 24 Jun 2008) | 1 line
+
+Launchers: Introducing BrowserInstallation object for future launch time optimization
+------------------------------------------------------------------------
+r2321 | ph7 | 2008-06-24 23:55:37 -0700 (Tue, 24 Jun 2008) | 1 line
+
+Launchers: Avoid 'rediscovering' browser installations at each session start. Cache browser installation at the VM level.
+------------------------------------------------------------------------
+r2322 | ph7 | 2008-06-30 19:46:40 -0700 (Mon, 30 Jun 2008) | 1 line
+
+Simple code simplification to trigger a new build
+------------------------------------------------------------------------
+r2323 | ph7 | 2008-06-30 20:23:51 -0700 (Mon, 30 Jun 2008) | 1 line
+
+Server: Minor update in error messages when browser cannot be found
+------------------------------------------------------------------------
+r2324 | ph7 | 2008-06-30 22:12:37 -0700 (Mon, 30 Jun 2008) | 1 line
+
+Fix Firefox 2 launch on Ubuntu 7.x: Set library path when creating profile
+------------------------------------------------------------------------
+r2325 | shin | 2008-07-15 10:07:18 -0700 (Tue, 15 Jul 2008) | 3 lines
+
+removed response text from Selnium RC Server.
+When command, waitForPageToLoad executed, the response does not return "OK" string anymore.
+
+------------------------------------------------------------------------
+r2326 | jbevan | 2008-07-16 16:05:09 -0700 (Wed, 16 Jul 2008) | 5 lines
+
+This revision applies Erik Beans' and Jason Huggins' patch, described below and in http://clearspace.openqa.org/docs/DOC-1192
+
+This patch allows the test to specify which of a number of admin-installed profiles on a (remote) machine should be used when starting firefox for that test. It is only integrated with the java client. The RC server gains a command-line flag called -profilesLocation, so that if the machine adminstrator(s) install a profile in $profilesLocation/mytestprofile, the test would call: BrowserConfigurationOptions co = new BrowserConfigurationOptions("profile:mytestprofile"); String url = "http://www.google.com"; selenium = new DefaultSelenium("localhost", RemoteControlConfiguration.getDefaultPort(), "*chrome", url); selenium.start(co); This patch was tested on linux and windows (firefox 2.0), until I wanted to refactor a few things. After that the patch has (so far) only been tested on linux. This patch is a diff file created by svn diff.
+
+
+------------------------------------------------------------------------
+r2327 | ph7 | 2008-07-16 17:56:10 -0700 (Wed, 16 Jul 2008) | 2 lines
+
+Screenshot formatter for RSpec reports. 
+
+------------------------------------------------------------------------
+r2328 | jbevan | 2008-07-18 12:26:09 -0700 (Fri, 18 Jul 2008) | 3 lines
+
+Fix and test for resource leaks in the face of IOExceptions. 
+
+
+------------------------------------------------------------------------
+r2329 | jbevan | 2008-07-18 12:29:40 -0700 (Fri, 18 Jul 2008) | 3 lines
+
+Fix index out of bounds exception by first checking to make sure the configuration option parsed correctly.
+
+
+------------------------------------------------------------------------
+r2330 | jbevan | 2008-07-18 12:40:45 -0700 (Fri, 18 Jul 2008) | 3 lines
+
+Add tests for BrowserConfigurationOptions initialization
+
+
+------------------------------------------------------------------------
+r2331 | jbevan | 2008-07-18 12:56:42 -0700 (Fri, 18 Jul 2008) | 5 lines
+
+Fix bug where the AbstractBrowserLauncher wouldn't failover to the launch(url) method if the browser configuration options object was empty.  
+
+As it turns out, parsing the browser configuration object parameters off of the command line defaults to creating a browser configuration object with no options -- the parameters are "".  This means that launch(url) was never getting called, so browsers other than *chrome were all failing their tests (e.g. *firefox).
+
+
+------------------------------------------------------------------------
+r2332 | ph7 | 2008-07-26 09:13:11 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Ruby Client: Added some information messages to debug CI problem
+
+------------------------------------------------------------------------
+r2333 | ph7 | 2008-07-26 09:19:35 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Ruby Client: Removing debug messages
+
+------------------------------------------------------------------------
+r2334 | dfabulich | 2008-07-26 11:41:15 -0700 (Sat, 26 Jul 2008) | 1 line
+
+SRC-489 Make Safari run tests from a file to support cross-domain testing
+------------------------------------------------------------------------
+r2337 | dfabulich | 2008-07-26 14:41:53 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+rename tests folder
+
+------------------------------------------------------------------------
+r2338 | dfabulich | 2008-07-26 14:42:39 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+move non-generated into the tests folder
+
+------------------------------------------------------------------------
+r2339 | dfabulich | 2008-07-26 14:45:22 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+copied generated project from clients/java
+
+------------------------------------------------------------------------
+r2340 | dfabulich | 2008-07-26 14:51:03 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+get rid of client driver
+
+------------------------------------------------------------------------
+r2341 | dfabulich | 2008-07-26 15:22:27 -0700 (Sat, 26 Jul 2008) | 1 line
+
+Checking in generated test project that kinda works on my machine
+------------------------------------------------------------------------
+r2342 | dfabulich | 2008-07-26 15:33:32 -0700 (Sat, 26 Jul 2008) | 1 line
+
+Updating classpath
+------------------------------------------------------------------------
+r2343 | dfabulich | 2008-07-26 15:33:48 -0700 (Sat, 26 Jul 2008) | 1 line
+
+Deleting unit tests
+------------------------------------------------------------------------
+r2344 | dfabulich | 2008-07-26 15:34:54 -0700 (Sat, 26 Jul 2008) | 1 line
+
+getting rid of another unit test
+------------------------------------------------------------------------
+r2345 | ph7 | 2008-07-26 15:48:11 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Integration Tests: make sure we create the target directory so that 'mvn test' does not fail after a clean
+
+------------------------------------------------------------------------
+r2346 | dfabulich | 2008-07-26 17:26:56 -0700 (Sat, 26 Jul 2008) | 1 line
+
+fixing some tests, excluding some tests
+------------------------------------------------------------------------
+r2347 | dfabulich | 2008-07-26 17:28:00 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Use selenum.defaultBrowser if one is specified
+
+------------------------------------------------------------------------
+r2348 | ph7 | 2008-07-26 17:40:07 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Do not run TestProxy : Hang browser
+
+------------------------------------------------------------------------
+r2349 | dfabulich | 2008-07-26 17:41:09 -0700 (Sat, 26 Jul 2008) | 1 line
+
+thinko, it's TestProxy that hangs, not TestBrowser
+------------------------------------------------------------------------
+r2350 | dfabulich | 2008-07-26 18:11:24 -0700 (Sat, 26 Jul 2008) | 1 line
+
+Changing defaults.  Making multiWindow the default, making chrome the default, making hta the default.  Use firefoxproxy or iexploreproxy to get back the old modes
+------------------------------------------------------------------------
+r2351 | ph7 | 2008-07-26 18:23:44 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Java Client: Removed integration and generated tests. They now have been moved to the test subprojects
+
+------------------------------------------------------------------------
+r2352 | ph7 | 2008-07-26 18:30:47 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Java Client: Single naming convention for all tests
+
+------------------------------------------------------------------------
+r2353 | dfabulich | 2008-07-26 18:37:57 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Deleting this broken test; their autocompleter sucks :-)
+
+------------------------------------------------------------------------
+r2354 | dfabulich | 2008-07-26 18:39:04 -0700 (Sat, 26 Jul 2008) | 1 line
+
+Don't need these suites any more
+------------------------------------------------------------------------
+r2355 | dfabulich | 2008-07-26 18:39:54 -0700 (Sat, 26 Jul 2008) | 1 line
+
+Delete unit test
+------------------------------------------------------------------------
+r2356 | dfabulich | 2008-07-26 18:40:14 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+These are thirdParty testsx
+
+------------------------------------------------------------------------
+r2357 | dfabulich | 2008-07-26 18:47:16 -0700 (Sat, 26 Jul 2008) | 1 line
+
+fixing test
+------------------------------------------------------------------------
+r2358 | dfabulich | 2008-07-26 18:47:36 -0700 (Sat, 26 Jul 2008) | 1 line
+
+don't switch browsers in the test; let the runner handle that
+------------------------------------------------------------------------
+r2359 | dfabulich | 2008-07-26 18:48:21 -0700 (Sat, 26 Jul 2008) | 1 line
+
+multidomain test is a thirdparty test (though it's arguably passable when offline)
+------------------------------------------------------------------------
+r2360 | dfabulich | 2008-07-26 18:50:52 -0700 (Sat, 26 Jul 2008) | 1 line
+
+WindowNamesTest is validated using other generated tests
+------------------------------------------------------------------------
+r2361 | ph7 | 2008-07-26 18:57:05 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Extracted some methods for SessionExtensionJS test
+
+------------------------------------------------------------------------
+r2362 | ph7 | 2008-07-26 18:59:56 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Java Client: Making extracted methods visible for integration tests
+
+------------------------------------------------------------------------
+r2363 | dfabulich | 2008-07-26 19:23:03 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Use redirect HTML on Mac.  Safari won't even let you open a file URL without using this redirect hack!
+
+------------------------------------------------------------------------
+r2364 | ph7 | 2008-07-26 19:28:20 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+Fixing the test as multiWindow is now true by default
+
+------------------------------------------------------------------------
+r2365 | ph7 | 2008-07-26 19:38:45 -0700 (Sat, 26 Jul 2008) | 2 lines
+
+oops forgot to check that in
+
+------------------------------------------------------------------------
+r2366 | gyrm | 2008-07-27 15:29:40 -0700 (Sun, 27 Jul 2008) | 1 line
+
+Add some better documentation for setExtensionJs ... at least for the Java driver.
+------------------------------------------------------------------------
+r2367 | gyrm | 2008-07-28 15:02:47 -0700 (Mon, 28 Jul 2008) | 1 line
+
+Restore ability to use single window mode with the -singleWindow switch
+------------------------------------------------------------------------
+r2368 | ph7 | 2008-08-12 11:02:38 -0700 (Tue, 12 Aug 2008) | 2 lines
+
+Server: Extracted logging configuration logic in a separate class: LoggingManager
+
+------------------------------------------------------------------------
+r2369 | gyrm | 2008-08-13 08:21:31 -0700 (Wed, 13 Aug 2008) | 1 line
+
+Add patch by Alex Ward to also consider *firefox2 and *firefox3 when cutting over to *pifirefox.
+------------------------------------------------------------------------
+r2370 | ph7 | 2008-08-13 21:32:04 -0700 (Wed, 13 Aug 2008) | 1 line
+
+Pluging  a simple in memory logging handler
+------------------------------------------------------------------------
+r2371 | ph7 | 2008-08-13 21:52:26 -0700 (Wed, 13 Aug 2008) | 1 line
+
+Short Term Memory Log Handler : Filter log levels
+------------------------------------------------------------------------
+r2372 | ph7 | 2008-08-13 22:57:44 -0700 (Wed, 13 Aug 2008) | 1 line
+
+Placeholder command for retrieveLastRemoteControlLogs, actual log formatting is pending
+------------------------------------------------------------------------
+r2373 | ph7 | 2008-08-13 23:43:54 -0700 (Wed, 13 Aug 2008) | 2 lines
+
+Working implementation of retrieveLastRemoteControlLogs. Still work to do on the configuration aspect.
+
+------------------------------------------------------------------------
+r2374 | ph7 | 2008-08-14 07:19:52 -0700 (Thu, 14 Aug 2008) | 2 lines
+
+Putting back LoggingManager that I accidently deleted
+
+------------------------------------------------------------------------
+r2375 | paul | 2008-08-14 11:02:38 -0700 (Thu, 14 Aug 2008) | 1 line
+
+patch for SRC-510 from Greg Block, Google
+------------------------------------------------------------------------
+r2376 | ph7 | 2008-08-15 01:21:44 -0700 (Fri, 15 Aug 2008) | 2 lines
+
+Ruby Client: Improving the RSpec formatter with RC logs
+
+------------------------------------------------------------------------
+r2377 | ph7 | 2008-08-15 17:24:05 -0700 (Fri, 15 Aug 2008) | 2 lines
+
+Ruby Client: Integration Tests for screenshot capture
+
+------------------------------------------------------------------------
+r2378 | ph7 | 2008-08-16 13:32:05 -0700 (Sat, 16 Aug 2008) | 2 lines
+
+Ruby Client: Cleaning up the RSpec report formatter
+
+------------------------------------------------------------------------
+r2379 | ph7 | 2008-08-16 14:34:36 -0700 (Sat, 16 Aug 2008) | 2 lines
+
+Remote Control: Avoid Larsen Effect and OutOfMemoryError on retrieveLastRemoteControlLogs
+
+------------------------------------------------------------------------
+r2380 | ph7 | 2008-08-16 16:34:41 -0700 (Sat, 16 Aug 2008) | 2 lines
+
+A bunch of svn ignores for Intellij Idea Users
+
+------------------------------------------------------------------------
+r2381 | ph7 | 2008-08-16 17:16:34 -0700 (Sat, 16 Aug 2008) | 2 lines
+
+Ruby Client: Fixing Report JavaScript
+
+------------------------------------------------------------------------
+r2382 | ph7 | 2008-08-18 21:37:56 -0700 (Mon, 18 Aug 2008) | 2 lines
+
+Ruby Client: Created dummy project to test/showcase reporting features
+
+------------------------------------------------------------------------
+r2383 | paul | 2008-08-19 11:20:51 -0700 (Tue, 19 Aug 2008) | 1 line
+
+SRC-511 applied
+------------------------------------------------------------------------
+r2384 | paul | 2008-08-19 17:27:44 -0700 (Tue, 19 Aug 2008) | 1 line
+
+add Junit4 and TestNG compatibility
+------------------------------------------------------------------------
+r2385 | paul | 2008-08-19 17:41:04 -0700 (Tue, 19 Aug 2008) | 1 line
+
+if someone wants to override with a junit3/4 or testng exception they can
+------------------------------------------------------------------------
+r2386 | ph7 | 2008-08-20 23:31:30 -0700 (Wed, 20 Aug 2008) | 2 lines
+
+Consolidating common code used by the 2 Safari launchers
+
+------------------------------------------------------------------------
+r2387 | ph7 | 2008-08-22 00:31:59 -0700 (Fri, 22 Aug 2008) | 1 line
+
+captureEntirePageScreenshotToString implementation
+------------------------------------------------------------------------
+r2388 | jbevan | 2008-08-22 10:58:15 -0700 (Fri, 22 Aug 2008) | 4 lines
+
+Patch for SRC-516 from Erik Beans (ebeans@google.com).
+This patch passes unit tests, but the full test suite is not currently running due to a java.net.ConnectException on the browser launch. 
+
+
+------------------------------------------------------------------------
+r2389 | ph7 | 2008-08-23 15:44:50 -0700 (Sat, 23 Aug 2008) | 2 lines
+
+RC: Fixing captureEntirePageScreenshotToString. Ruby driver: Improved RSpec reports including page screenshots
+
+------------------------------------------------------------------------
+r2390 | ph7 | 2008-08-23 15:58:40 -0700 (Sat, 23 Aug 2008) | 2 lines
+
+RC: Fixing regression I introduced in captureScreenshotToString
+
+------------------------------------------------------------------------
+r2391 | ph7 | 2008-08-24 07:40:36 -0700 (Sun, 24 Aug 2008) | 2 lines
+
+Better spec_helper for Ruby client dummy reporting project
+
+------------------------------------------------------------------------
+r2392 | ph7 | 2008-08-26 07:15:48 -0700 (Tue, 26 Aug 2008) | 2 lines
+
+Ruby Client: Tasks to start / stop selenium RC
+
+------------------------------------------------------------------------
+r2393 | ph7 | 2008-08-26 11:06:43 -0700 (Tue, 26 Aug 2008) | 1 line
+
+Ruby Client: Remote Control instrumentation
+------------------------------------------------------------------------
+r2394 | ph7 | 2008-08-26 23:13:29 -0700 (Tue, 26 Aug 2008) | 2 lines
+
+Ruby Client: Make it easy to just require the Rake tasks
+
+------------------------------------------------------------------------
+r2395 | dfabulich | 2008-08-27 17:46:18 -0700 (Wed, 27 Aug 2008) | 1 line
+
+run the unit tests in headless mode
+------------------------------------------------------------------------
+r2396 | dfabulich | 2008-08-27 17:54:22 -0700 (Wed, 27 Aug 2008) | 1 line
+
+don't use spaces in our temporary directory names
+------------------------------------------------------------------------
+r2397 | ph7 | 2008-08-27 23:31:47 -0700 (Wed, 27 Aug 2008) | 2 lines
+
+Ruby Client : Fixed unit tests to stubs mkdir_p
+
+------------------------------------------------------------------------
+r2398 | dfabulich | 2008-08-27 23:56:22 -0700 (Wed, 27 Aug 2008) | 1 line
+
+fixing ant script so we can find the rake file
+------------------------------------------------------------------------
+r2399 | dfabulich | 2008-08-28 00:17:52 -0700 (Thu, 28 Aug 2008) | 1 line
+
+adding custom settings file for maven proxy
+------------------------------------------------------------------------
+r2400 | dfabulich | 2008-08-28 00:48:47 -0700 (Thu, 28 Aug 2008) | 1 line
+
+fixing references to outdated snapshots
+------------------------------------------------------------------------
+r2401 | ph7 | 2008-08-28 07:44:32 -0700 (Thu, 28 Aug 2008) | 1 line
+
+Ruby Client: Fixing the unit tests on windows
+------------------------------------------------------------------------
+r2402 | ph7 | 2008-08-30 09:42:29 -0700 (Sat, 30 Aug 2008) | 1 line
+
+Ruby client: Fixed the rake tasks to start/stop RCs on Windows
+------------------------------------------------------------------------
+r2403 | ph7 | 2008-08-30 10:02:00 -0700 (Sat, 30 Aug 2008) | 2 lines
+
+Ruby Client: Updating the RSpec formatter test
+
+------------------------------------------------------------------------
+r2404 | ph7 | 2008-08-31 11:26:00 -0700 (Sun, 31 Aug 2008) | 2 lines
+
+Ruby Client: More idiomatic Ruby API for selenium driver
+
+------------------------------------------------------------------------
+r2405 | ph7 | 2008-08-31 17:42:15 -0700 (Sun, 31 Aug 2008) | 2 lines
+
+Ruby Client: Test updates using idiomatic API
+
+------------------------------------------------------------------------
+r2406 | ph7 | 2008-09-02 18:20:40 -0700 (Tue, 02 Sep 2008) | 2 lines
+
+Remote Control : Updating Firefox 3 default path on Ubuntu 8.04
+
+------------------------------------------------------------------------
+r2407 | ph7 | 2008-09-03 11:16:52 -0700 (Wed, 03 Sep 2008) | 2 lines
+
+Ruby Client : Easier use of rspec reporting by defining a base spec helper capturing system state after each test
+
+------------------------------------------------------------------------
+r2408 | jbevan | 2008-09-03 11:39:59 -0700 (Wed, 03 Sep 2008) | 3 lines
+
+Submitted to resolve SRC-520.  This patch was written by Patrick Johnson at Google, for the new Google Chrome browser.  It uses the key "*googlechrome" as its analog to "*firefox" or "*iehta".  This browser has been tested on Windows XP and Vista.
+
+
+------------------------------------------------------------------------
+r2409 | ph7 | 2008-09-03 17:39:23 -0700 (Wed, 03 Sep 2008) | 2 lines
+
+Fixing the build on non Windows platforms. The GoogleChrome launcher patch broke the build on Linux and Mac OS X.
+
+------------------------------------------------------------------------
+r2410 | jbevan | 2008-09-03 21:52:36 -0700 (Wed, 03 Sep 2008) | 3 lines
+
+Added to resolve SRC-523.  Checks for null before passing the argument to setFormatter, which throws an NPE on a null argument.  This bug and fix were investigated by Daniel Martin at Google.
+
+
+------------------------------------------------------------------------
+r2411 | dfabulich | 2008-09-03 23:00:58 -0700 (Wed, 03 Sep 2008) | 1 line
+
+Adding new SeleneseTestNgHelper for TestNG translation
+------------------------------------------------------------------------
+r2412 | ph7 | 2008-09-04 10:48:16 -0700 (Thu, 04 Sep 2008) | 1 line
+
+TestNG client: Fixing the build again. The testNG client did not compile as it needed TestNG as a compile time dependency
+------------------------------------------------------------------------
+r2413 | ph7 | 2008-09-04 16:14:44 -0700 (Thu, 04 Sep 2008) | 2 lines
+
+Build: Make sure we shutdown any existing Remote Control before running the server-coreless "unit" tests which launch servers on port 4444. Useful to avoid misleading build failures on the new Hudson base CI system.
+
+------------------------------------------------------------------------
+r2414 | dfabulich | 2008-09-04 20:08:24 -0700 (Thu, 04 Sep 2008) | 2 lines
+
+Comment out xlator reference so I can check in my changes without breaking the build
+
+------------------------------------------------------------------------
+r2415 | dfabulich | 2008-09-04 20:10:40 -0700 (Thu, 04 Sep 2008) | 2 lines
+
+Working with new Selenium IDE on updated xlator
+
+------------------------------------------------------------------------
+r2416 | dfabulich | 2008-09-04 20:11:36 -0700 (Thu, 04 Sep 2008) | 2 lines
+
+Fixing build failure
+
+------------------------------------------------------------------------
+r2417 | dfabulich | 2008-09-04 20:40:49 -0700 (Thu, 04 Sep 2008) | 1 line
+
+we can be java 1.5 in the generated tests
+------------------------------------------------------------------------
+r2418 | dfabulich | 2008-09-06 13:23:57 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Negative speed defaults to 0 (tested by TestSetSpeed)
+
+------------------------------------------------------------------------
+r2419 | dfabulich | 2008-09-06 13:24:17 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Add a constructor that doesn't have the slowResources boolean, because nobody cares about it
+
+------------------------------------------------------------------------
+r2420 | dfabulich | 2008-09-06 13:40:39 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Use TestSelectWindow instead of TestClick as the sample test, because it does an array comparison
+
+------------------------------------------------------------------------
+r2421 | dfabulich | 2008-09-06 16:05:48 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Thirdparty tests go in the thirdparty package
+
+------------------------------------------------------------------------
+r2422 | dfabulich | 2008-09-06 16:19:54 -0700 (Sat, 06 Sep 2008) | 1 line
+
+refactor non-generated tests to use SeleneseTestNgHelper
+------------------------------------------------------------------------
+r2423 | dfabulich | 2008-09-06 16:22:14 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Inline AbstractTest
+
+------------------------------------------------------------------------
+r2424 | dfabulich | 2008-09-06 17:16:24 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Deleting SSLOpenTest; we can't get a version of it that works in HTA/Chrome
+
+------------------------------------------------------------------------
+r2425 | dfabulich | 2008-09-06 17:19:56 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Convert some tests to TestNG
+
+------------------------------------------------------------------------
+r2426 | dfabulich | 2008-09-06 17:20:18 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Add a launcher that TestNG can run (or exclude, if necessary)
+
+------------------------------------------------------------------------
+r2427 | dfabulich | 2008-09-06 17:26:13 -0700 (Sat, 06 Sep 2008) | 1 line
+
+Moving over non-generated tests
+------------------------------------------------------------------------
+r2428 | dfabulich | 2008-09-06 17:27:19 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Deleting some non-generated tests (having moved them over to non-generated section)
+
+------------------------------------------------------------------------
+r2429 | dfabulich | 2008-09-06 17:48:42 -0700 (Sat, 06 Sep 2008) | 1 line
+
+Fixing up some of the thirdparty tests
+------------------------------------------------------------------------
+r2430 | dfabulich | 2008-09-06 18:48:51 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+This test doesn't need to be a third party test.
+
+------------------------------------------------------------------------
+r2431 | dfabulich | 2008-09-06 18:51:22 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+SessionExtensionJsTest isn't a thirdparty generated test
+
+------------------------------------------------------------------------
+r2432 | dfabulich | 2008-09-06 18:58:25 -0700 (Sat, 06 Sep 2008) | 2 lines
+
+Converted to TestNG
+
+------------------------------------------------------------------------
+r2433 | gyrm | 2008-09-07 13:52:08 -0700 (Sun, 07 Sep 2008) | 1 line
+
+First pass at a Selenium GroovyTestCase class, included with the Java client driver.
+------------------------------------------------------------------------
+r2434 | gyrm | 2008-09-07 15:16:54 -0700 (Sun, 07 Sep 2008) | 1 line
+
+Renaming for consistency.
+------------------------------------------------------------------------
+r2435 | gyrm | 2008-09-07 15:53:20 -0700 (Sun, 07 Sep 2008) | 1 line
+
+Add waitFor() convenient method to GroovySeleneseTestCase.
+------------------------------------------------------------------------
+r2436 | gyrm | 2008-09-07 21:22:59 -0700 (Sun, 07 Sep 2008) | 1 line
+
+Dynamically add *AndWait methods for Groovy tests.
+------------------------------------------------------------------------
+r2437 | dfabulich | 2008-09-10 21:28:55 -0700 (Wed, 10 Sep 2008) | 2 lines
+
+wired up to depend on other projects
+
+------------------------------------------------------------------------
+r2438 | dfabulich | 2008-09-10 21:30:18 -0700 (Wed, 10 Sep 2008) | 2 lines
+
+Switch the tests over to using TestNG.  Don't hand modify anything; just exclude bad tests.
+
+------------------------------------------------------------------------
+r2439 | dfabulich | 2008-09-10 21:47:49 -0700 (Wed, 10 Sep 2008) | 2 lines
+
+roll generate-sources into the pom; add failing tests to TestNG exclude list
+
+------------------------------------------------------------------------
+r2440 | dfabulich | 2008-09-13 13:53:04 -0700 (Sat, 13 Sep 2008) | 2 lines
+
+turn down logging slightly
+
+------------------------------------------------------------------------
+r2441 | dfabulich | 2008-09-13 13:59:04 -0700 (Sat, 13 Sep 2008) | 2 lines
+
+Make * optional in browser launcher name
+
+------------------------------------------------------------------------
+r2442 | dfabulich | 2008-09-13 14:02:15 -0700 (Sat, 13 Sep 2008) | 2 lines
+
+Additional fixes to aid translation
+
+------------------------------------------------------------------------
+r2443 | dfabulich | 2008-09-13 14:03:03 -0700 (Sat, 13 Sep 2008) | 2 lines
+
+More helpers to aid in translation
+
+------------------------------------------------------------------------
+r2444 | dfabulich | 2008-09-13 14:03:44 -0700 (Sat, 13 Sep 2008) | 2 lines
+
+attributes can be ints
+
+------------------------------------------------------------------------
+r2445 | dfabulich | 2008-09-14 15:27:05 -0700 (Sun, 14 Sep 2008) | 2 lines
+
+allow selenium.browser to be parameterized from system property
+
+------------------------------------------------------------------------
+r2446 | gyrm | 2008-09-15 21:09:43 -0700 (Mon, 15 Sep 2008) | 1 line
+
+Remove server jar dependency from java client driver. See http://clearspace.openqa.org/message/48878 
+------------------------------------------------------------------------
+r2447 | gyrm | 2008-09-15 21:29:27 -0700 (Mon, 15 Sep 2008) | 1 line
+
+Fix the mocks in a couple of tests.
+------------------------------------------------------------------------
+r2448 | gyrm | 2008-09-15 21:42:58 -0700 (Mon, 15 Sep 2008) | 1 line
+
+Yeah, I forgot to edit iedoc2java.xml ...
+------------------------------------------------------------------------
+r2449 | jbevan | 2008-09-16 14:52:00 -0700 (Tue, 16 Sep 2008) | 3 lines
+
+While starting to investigate why *iexplore was launching IE HTA, I refactored a bit to add some tests.  It's purely gratuitous now because the assignment gets made in BrowserLauncherFactory.supportedBrowsers, but hey, more small tests are always good.
+
+
+------------------------------------------------------------------------
+r2450 | ph7 | 2008-09-20 15:54:55 -0700 (Sat, 20 Sep 2008) | 2 lines
+
+Fixing regressions in browser start string parsing introduced by rev 2449. Also improved parsing to be more friendly when a trailing spaces are provided (NPE is not very user friendly... ;-)
+
+------------------------------------------------------------------------
+r2451 | ph7 | 2008-09-27 09:39:44 -0700 (Sat, 27 Sep 2008) | 1 line
+
+Ruby Client: Ignoring .git
+------------------------------------------------------------------------
+r2452 | ph7 | 2008-09-27 09:55:06 -0700 (Sat, 27 Sep 2008) | 2 lines
+
+More idiomatic api and made the project work as a standalone gem
+
+------------------------------------------------------------------------
+r2453 | ph7 | 2008-09-27 10:30:46 -0700 (Sat, 27 Sep 2008) | 2 lines
+
+Runu unit tests as part of the ci:integration task. Ensure that the Selenium RC jar file can be found.
+
+------------------------------------------------------------------------
+r2454 | ph7 | 2008-09-27 10:40:39 -0700 (Sat, 27 Sep 2008) | 1 line
+
+Ruby Client: More consistent browser configuration for integration tests
+------------------------------------------------------------------------
+r2455 | ph7 | 2008-09-27 13:31:58 -0700 (Sat, 27 Sep 2008) | 1 line
+
+Fixing the iedoc.xml extraction logic. Avoid anoying warnings in dust gem.
+------------------------------------------------------------------------
+r2456 | ph7 | 2008-09-27 14:56:55 -0700 (Sat, 27 Sep 2008) | 1 line
+
+Ruby Client build. Ensure we shutdow Selenium RC
+------------------------------------------------------------------------
+r2457 | ph7 | 2008-09-27 15:30:04 -0700 (Sat, 27 Sep 2008) | 1 line
+
+Ruby Client: explicit net/http require for selenium RC start/stop tasks
+------------------------------------------------------------------------
+r2458 | gyrm | 2008-09-29 21:48:50 -0700 (Mon, 29 Sep 2008) | 1 line
+
+Enhance Groovy driver to allow screenshots to automatically be taken on command failures.
+------------------------------------------------------------------------
+r2459 | gyrm | 2008-09-30 08:33:45 -0700 (Tue, 30 Sep 2008) | 1 line
+
+Clean up GroovySelenium implementation, and add ability to specify postSuccess() and postFailure() overrides.
+------------------------------------------------------------------------
+r2460 | ph7 | 2008-09-30 10:57:41 -0700 (Tue, 30 Sep 2008) | 1 line
+
+More idiomatic API for the Ruby client. Merging my changes on github.
+------------------------------------------------------------------------
+r2461 | ph7 | 2008-09-30 13:13:53 -0700 (Tue, 30 Sep 2008) | 1 line
+
+Fix for SRC-535 : Unsafe unsynchronized variable access in firefox browserlaunchers
+------------------------------------------------------------------------
+r2462 | ph7 | 2008-09-30 23:06:23 -0700 (Tue, 30 Sep 2008) | 1 line
+
+Do not pollute logs with png dumps
+------------------------------------------------------------------------
+r2463 | ph7 | 2008-09-30 23:12:12 -0700 (Tue, 30 Sep 2008) | 1 line
+
+Ruby cleint, fixing the ordering of the after(:each) for optimal system capture in RSpec reports
+------------------------------------------------------------------------
+r2464 | ph7 | 2008-10-01 07:34:36 -0700 (Wed, 01 Oct 2008) | 1 line
+
+SRC-535: Unsafe unsynchronized variable access in firefox browserlaunchers. Fix for the Firefox custom profile launcher.
+------------------------------------------------------------------------
+r2465 | ph7 | 2008-10-01 15:14:24 -0700 (Wed, 01 Oct 2008) | 1 line
+
+Adding a sample unit test using mocking to make it easy for Andras to fix SRC-438
+------------------------------------------------------------------------
+r2466 | ph7 | 2008-10-01 21:35:26 -0700 (Wed, 01 Oct 2008) | 1 line
+
+Require RSpec 1.1.4 explicitely. Testing the cookie api.
+------------------------------------------------------------------------
+r2467 | ph7 | 2008-10-01 21:54:53 -0700 (Wed, 01 Oct 2008) | 1 line
+
+oops forgot to check this one in...
+------------------------------------------------------------------------
+r2468 | ph7 | 2008-10-01 22:11:54 -0700 (Wed, 01 Oct 2008) | 1 line
+
+Fixing Firefox default path on Ubuntu
+------------------------------------------------------------------------
+r2469 | ph7 | 2008-10-02 22:08:46 -0700 (Thu, 02 Oct 2008) | 1 line
+
+Workaround to make Selenium RSpec reporting work with DeepTest
+------------------------------------------------------------------------
+r2470 | plightbo | 2008-10-08 10:43:31 -0700 (Wed, 08 Oct 2008) | 1 line
+
+minor fix to ensure that SSL proxying doesn't cause SeleniumServer not to be able to shut down gracefully
+------------------------------------------------------------------------
+r2471 | andras.hatvani | 2008-10-08 17:40:20 -0700 (Wed, 08 Oct 2008) | 3 lines
+
++ Added CaptureScreenshotToStringCommandUnitTest
+* Added tests to CaptureScreenshotCommandUnitTest
+* Implemented SRC-438
+------------------------------------------------------------------------
+r2472 | plightbo | 2008-10-09 20:06:14 -0700 (Thu, 09 Oct 2008) | 1 line
+
+disabling test temporarily. need to figure out a way to get this to pass in a headless environment
+------------------------------------------------------------------------
+r2473 | plightbo | 2008-10-09 20:12:30 -0700 (Thu, 09 Oct 2008) | 1 line
+
+disabling test temporarily. need to figure out a way to get this to pass in a headless environment
+------------------------------------------------------------------------
+r2474 | plightbo | 2008-10-09 20:16:34 -0700 (Thu, 09 Oct 2008) | 1 line
+
+disabling test temporarily. need to figure out a way to get this to pass in a headless environment
+------------------------------------------------------------------------
+r2475 | plightbo | 2008-10-09 20:38:25 -0700 (Thu, 09 Oct 2008) | 1 line
+
+no need to use SNAPSHOT of assembly it seems
+------------------------------------------------------------------------
+r2476 | dfabulich | 2008-10-09 22:12:54 -0700 (Thu, 09 Oct 2008) | 2 lines
+
+Commenting out alternate wagon
+
+------------------------------------------------------------------------
+r2477 | dfabulich | 2008-10-09 23:01:01 -0700 (Thu, 09 Oct 2008) | 2 lines
+
+Commenting out forkMode=never, which seems to be screwing up Maven deploy
+
+------------------------------------------------------------------------
+r2478 | ph7 | 2008-10-13 18:44:16 -0700 (Mon, 13 Oct 2008) | 2 lines
+
+Upgraded RSpec support to 1.1.8
+
+------------------------------------------------------------------------

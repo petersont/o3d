@@ -1,0 +1,6 @@
+This version of V8 has been modified for Client3D.
+- Removed #define _HAS_EXCEPTIONS 0, which was causing compilation errors
+- Changed compiler and linker options in SConstruct to be compatible with C3D
+- Changed the build_dir
+- Removed "_g" suffix from debug binaries (we don't use that convention - they
+  go in a different directory)

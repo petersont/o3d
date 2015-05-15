@@ -1,0 +1,15 @@
+URL: http://code.google.com/p/jsdoc-toolkit/downloads/list
+Version: 2.1.0
+License: BSD-Like notice license
+
+Description:
+The jsdoctoolkit reads jsdoc comments from javascript files and
+generates reference documentation, typically as html files although
+that can be configured.
+
+Local Modifications:
+Changed a few line in app/iib/JSDOC/SymbolSet.js in the function
+JSDOC.SymbolSet.prototype.walk. The issue is the jsdoctoolkit expects @extends
+to use no brackets around the type. but the google JSCompiler expects brackets.
+This change makes @externs work with brackets.
+

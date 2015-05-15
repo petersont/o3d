@@ -1,0 +1,37 @@
+URL: http://pdiff.sourceforge.net/
+Version: 1.1.1
+License: GNU General Public License
+License File: files/source/gpl.txt
+
+Description:
+PerceptualDiff is an image comparison utility that makes use of a 
+computational model of the human visual system to compare two images.
+
+Local Modifications:
+An "-ignoreEdges e (0 to 7)" option is added to the original version,
+which can turn on the edge detection function and prevent edges in
+the images from being checked during comparison.
+Parameter e is the max number of neighbors the pixel can have to be
+considered as edge. If e is a large value, like 6 or 7, more possible
+edges would be ignored during comparison, if e is a small value near 0,
+only scattered points would be ignored from being checked.
+Edge detection function employs convolution with a 
+3-by-3 kernel:
+-1 -1 -1
+-1  8 -1
+-1 -1 -1
+It will first detect edges in the original pdiff output image,
+and create a new pdiff result by substracting edges from the original
+output image, and also recalculate unmatched pixels to make results
+consistent.
+
+----
+To build on OSX:
+  install ports from http://www.macports.org
+  open a new terminal
+  sudo port install cmake
+  sudo port install freeimage
+  open a new terminal
+  cd pdiff/files/source
+  cmake .
+  make

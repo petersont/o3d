@@ -1,0 +1,41 @@
+vars = {
+  "chromium_trunk":
+    "http://src.chromium.org/svn/trunk",
+  "nixysa_rev": "21",
+}
+
+deps = {
+  "googleclient/native_client":
+    "http://nativeclient.googlecode.com/svn/trunk/nacl/googleclient/native_client@188",
+
+  "googleclient/third_party/breakpad/files":
+    "http://google-breakpad.googlecode.com/svn/trunk/@329",
+
+  "googleclient/third_party/nixysa/files":
+    "http://nixysa.googlecode.com/svn/trunk/nixysa@" + Var("nixysa_rev"),
+
+  "googleclient/third_party/npapi/files":
+    "http://nixysa.googlecode.com/svn/trunk/third_party/npapi@" + Var("nixysa_rev"),
+
+  "googleclient/third_party/ply/files":
+    "http://nixysa.googlecode.com/svn/trunk/third_party/ply-3.1@" + Var("nixysa_rev"),
+
+  "googleclient/third_party/gflags/":
+    "http://google-gflags.googlecode.com/svn/trunk@30",
+
+  "googleclient/third_party/gtest/files":
+    "http://googletest.googlecode.com/svn/tags/release-1.2.1",
+
+  "googleclient/third_party/gmock/files":
+    "http://googlemock.googlecode.com/svn/tags/release-1.0.0",
+
+  "googleclient/third_party/jsdoctoolkit/files":
+    "http://jsdoc-toolkit.googlecode.com/svn/tags/jsdoc_toolkit-2.1.0/jsdoc-toolkit",
+}
+
+deps_os = {
+  "win": {
+    "googleclient/third_party/python_24":
+      Var("chromium_trunk") + "/deps/third_party/python_24@7444",
+  },
+}

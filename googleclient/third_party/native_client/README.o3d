@@ -1,0 +1,10 @@
+Name: Native Client
+URL: http://nativeclient.googlecode.com/svn/trunk/src/native_client@2500
+License: see LICENSE file (new BSD license).
+
+Native Client is an open-source technology for running native code in web
+applications, with the goal of maintaining the browser neutrality, OS
+portability, and safety that people expect from web apps.
+
+Local changes:
+- This is only a subset of the full Native Client distribution.
